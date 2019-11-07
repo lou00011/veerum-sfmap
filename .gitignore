@@ -2,3 +2,5 @@
 node_modules
 public/bundle.*
 .idea
+film.db
+src/model/film.db
