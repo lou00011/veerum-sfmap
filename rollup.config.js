@@ -4,6 +4,8 @@ import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import rollup_start_dev from './rollup_start_dev';
+import json from 'rollup-plugin-json'
+import builtins from 'rollup-plugin-node-builtins'
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -33,23 +35,29 @@ export default {
 		// https://github.com/rollup/rollup-plugin-commonjs
 		resolve({
 			browser: true,
-			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
+			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
 		}),
 		commonjs(),
-
+		builtins(),
 		// In dev mode, call `npm run start:dev` once
 		// the bundle has been generated
 		!production && rollup_start_dev,
-
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
 		!production && livereload('public'),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+		json({
+			preferConst: true,
+			indent: '	',
+			compact: true,
+			namedExports: true
+		})
 	],
 	watch: {
 		clearScreen: false
-	}
+	},
+	external:['fs']
 };

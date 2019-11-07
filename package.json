@@ -2,22 +2,43 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "devDependencies": {
+    "@babel/preset-env": "^7.7.1",
+    "babel-jest": "^24.9.0",
+    "child_process": "^1.0.2",
+    "fs": "0.0.1-security",
+    "jest": "^24.9.0",
     "leaflet": "^1.5.1",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
     "rollup": "^1.12.0",
     "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
+    "sqlite3": "^4.1.0",
+    "stream": "0.0.2",
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "sirv-cli": "^0.4.4"
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/runtime": "^7.7.1",
+    "fuse.js": "^3.4.5",
+    "sirv-cli": "^0.4.4",
+    "svelte-select": "^3.1.1"
   },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --single",
-    "start:dev": "sirv public --single --dev"
+    "start:dev": "sirv public --single --dev",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }
